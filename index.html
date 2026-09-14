@@ -144,6 +144,37 @@ ul{list-style:none}
 .video-close:hover{background:rgba(255,255,255,.28)}
 .video-modal-box video{width:100%;max-height:92vh;display:block;background:#000}
 
+/* ===== AI 短剧选集模态框 ===== */
+.drama-modal{position:fixed;inset:0;z-index:280;display:none;align-items:center;justify-content:center;padding:24px}
+.drama-modal.open{display:flex}
+.drama-modal-bg{position:absolute;inset:0;background:rgba(5,16,28,.9);backdrop-filter:blur(6px)}
+.drama-modal-box{position:relative;width:min(900px,100%);max-height:92vh;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 40px 90px rgba(0,0,0,.55);display:flex;flex-direction:column}
+.drama-close{position:absolute;top:14px;right:14px;z-index:2;width:36px;height:36px;border-radius:10px;background:var(--navy-soft);color:var(--navy-900);display:flex;align-items:center;justify-content:center;transition:background .2s}
+.drama-close:hover{background:#E2EBF4}
+.drama-head{padding:22px 26px 14px}
+.drama-head h3{font-size:19px;font-weight:800;color:var(--navy-900)}
+.drama-head p{font-size:13px;color:var(--muted);margin-top:4px}
+.drama-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;padding:8px 26px 26px;overflow-y:auto}
+.drama-item{display:block;background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;text-decoration:none;transition:transform .2s,box-shadow .2s}
+.drama-item:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(15,43,70,.14)}
+.drama-cover{position:relative;aspect-ratio:2/3;overflow:hidden;background:var(--navy-soft)}
+.drama-cover img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s}
+.drama-item:hover .drama-cover img{transform:scale(1.05)}
+.drama-no{position:absolute;top:8px;left:8px;width:22px;height:22px;border-radius:7px;background:rgba(7,26,45,.72);color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.drama-info{padding:10px 11px 12px}
+.drama-info h4{font-size:13px;line-height:1.5;color:var(--navy-900);font-weight:700;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:39px}
+.drama-tags{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
+.drama-tags span{font-size:11px;padding:2px 8px;border-radius:20px;background:var(--accent-soft);color:var(--accent-strong);font-weight:600}
+.drama-tags span.d3{background:#E8F0F7;color:#2E6DA4}
+.drama-play{display:flex;align-items:center;justify-content:center;gap:5px;margin-top:9px;font-size:12px;font-weight:700;color:var(--accent);}
+@media(max-width:760px){
+  .drama-grid{grid-template-columns:repeat(2,1fr)}
+  .drama-modal-box{max-height:88vh}
+}
+@media(max-width:420px){
+  .drama-grid{grid-template-columns:repeat(2,1fr);gap:10px}
+}
+
 /* ===== 技能 ===== */
 .skills-wrap{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
 .skill-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:24px}
@@ -332,18 +363,18 @@ section[id],footer[id]{scroll-margin-top:72px}
     </div>
     <div class="pf-grid" id="pfGrid">
 
-      <a class="pf-card" data-cat="aigc" href="#" data-pending="1">
+      <a class="pf-card" data-cat="aigc" href="#" data-drama="1">
         <div class="pf-cover"><div class="cover-manju">
           <div class="cm-big">64<i>W+</i></div>
           <div class="cm-label">爆款代表作 · 红果短剧收藏</div>
-          <div class="cm-tags"><span>AI 短剧 × 6 部</span><span>真人 × 3 · 3D × 3</span></div>
+          <div class="cm-tags"><span>AI 短剧精选</span><span>3D × 3 · 真人 × 2</span></div>
         </div><span class="pf-tag">AIGC · 短剧</span></div>
         <div class="pf-body">
-          <h3>AI 短剧项目组（6 部）</h3>
+          <h3>AI 短剧精选（5 部）</h3>
           <div class="pf-role">工作经历 · 天津宣百文化</div>
-          <p>6 部 AI 短剧全流程制作（3 部真人、3 部 3D），题材覆盖年代家庭、乡村温情、豪门重生、玄幻系统；多平台落地红果短剧、抖音及海外。</p>
+          <p>从参与制作的 6 部 AI 短剧中精选 5 部代表作，题材覆盖豪门重生、玄幻末世、乡村温情、年代情感；多平台落地红果短剧、抖音及海外。</p>
           <div class="pf-data"><span>64W+ 收藏</span><span>30W+ 收藏</span><span>全流程参与制作</span></div>
-          <span class="pf-open">点击观看作品</span>
+          <span class="pf-open">点击查看剧集</span>
         </div>
       </a>
 
@@ -547,6 +578,62 @@ section[id],footer[id]{scroll-margin-top:72px}
   </div>
 </div>
 
+<!-- ===== AI 短剧选集模态框 ===== -->
+<div class="drama-modal" id="dramaModal" aria-hidden="true">
+  <div class="drama-modal-bg" data-drama-close></div>
+  <div class="drama-modal-box">
+    <button class="drama-close" data-drama-close aria-label="关闭选集">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    <div class="drama-head">
+      <h3>AI 短剧精选</h3>
+      <p>点击剧集即可直接播放</p>
+    </div>
+    <div class="drama-grid">
+      <a class="drama-item" href="#" data-video="assets/drama-lijia2.mp4">
+        <div class="drama-cover"><img src="assets/drama-lijia2.jpg" alt="前世厉家2"><span class="drama-no">1</span></div>
+        <div class="drama-info">
+          <h4>《前世惨死无人怜，重生厉家全听我差遣》2</h4>
+          <div class="drama-tags"><span class="d3">3D</span><span>豪门甜宠</span></div>
+          <div class="drama-play">点击播放</div>
+        </div>
+      </a>
+      <a class="drama-item" href="#" data-video="assets/drama-shenwang.mp4">
+        <div class="drama-cover"><img src="assets/drama-shenwang.jpg" alt="神王序列"><span class="drama-no">2</span></div>
+        <div class="drama-info">
+          <h4>《神王序列》</h4>
+          <div class="drama-tags"><span class="d3">3D</span><span>玄幻末世</span></div>
+          <div class="drama-play">点击播放</div>
+        </div>
+      </a>
+      <a class="drama-item" href="#" data-video="assets/drama-lijia1.mp4">
+        <div class="drama-cover"><img src="assets/drama-lijia1.jpg" alt="前世厉家1"><span class="drama-no">3</span></div>
+        <div class="drama-info">
+          <h4>《前世惨死无人怜，重生厉家全听我差遣》1</h4>
+          <div class="drama-tags"><span class="d3">3D</span><span>豪门甜宠</span></div>
+          <div class="drama-play">点击播放</div>
+        </div>
+      </a>
+      <a class="drama-item" href="#" data-video="assets/drama-yaya.mp4">
+        <div class="drama-cover"><img src="assets/drama-yaya.jpg" alt="荷花村的小芽芽"><span class="drama-no">4</span></div>
+        <div class="drama-info">
+          <h4>《荷花村的小芽芽》</h4>
+          <div class="drama-tags"><span>真人</span><span>乡村温情</span></div>
+          <div class="drama-play">点击播放</div>
+        </div>
+      </a>
+      <a class="drama-item" href="#" data-video="assets/drama-baling.mp4">
+        <div class="drama-cover"><img src="assets/drama-baling.jpg" alt="重生八零穿针引线"><span class="drama-no">5</span></div>
+        <div class="drama-info">
+          <h4>《重生八零：穿针引线》</h4>
+          <div class="drama-tags"><span>真人</span><span>年代情感</span></div>
+          <div class="drama-play">点击播放</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+
 <button id="toTop" aria-label="返回顶部" style="position:fixed;right:26px;bottom:26px;width:46px;height:46px;border-radius:12px;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 26px rgba(255,138,61,.4);opacity:0;pointer-events:none;transition:opacity .3s;z-index:90"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
 
 <script>
@@ -635,7 +722,40 @@ section[id],footer[id]{scroll-margin-top:72px}
     el.addEventListener('click',closeVideo);
   });
   document.addEventListener('keydown',function(e){
-    if(e.key==='Escape')closeVideo();
+    if(e.key==='Escape'){
+      if(videoModal.classList.contains('open'))closeVideo();
+      if(dramaModal.classList.contains('open'))closeDrama();
+    }
+  });
+
+  /* AI 短剧选集 */
+  var dramaModal=document.getElementById('dramaModal');
+  function openDrama(){
+    dramaModal.classList.add('open');
+    dramaModal.setAttribute('aria-hidden','false');
+  }
+  function closeDrama(){
+    dramaModal.classList.remove('open');
+    dramaModal.setAttribute('aria-hidden','true');
+  }
+  document.querySelectorAll('.pf-card[data-drama]').forEach(function(a){
+    a.addEventListener('click',function(e){
+      e.preventDefault();
+      openDrama();
+    });
+  });
+  dramaModal.querySelectorAll('[data-drama-close]').forEach(function(el){
+    el.addEventListener('click',closeDrama);
+  });
+  dramaModal.querySelectorAll('.drama-item').forEach(function(a){
+    a.addEventListener('click',function(e){
+      e.preventDefault();
+      closeDrama();
+      videoPlayer.setAttribute('src',a.getAttribute('data-video'));
+      videoModal.classList.add('open');
+      videoModal.setAttribute('aria-hidden','false');
+      videoPlayer.play()['catch'](function(){});
+    });
   });
 
   /* 技能条进入视口动画 */
