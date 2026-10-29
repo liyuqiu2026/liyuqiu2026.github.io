@@ -56,21 +56,31 @@ nav{position:sticky;top:0;z-index:100;display:flex;justify-content:center;paddin
 .stat .l{font-size:12px;color:var(--muted);margin-top:6px}
 
 /* ===== 区块标题 ===== */
-.sec{padding:40px 0}
+.sec{padding:50px 0 30px}
 .sec-tag{font-size:12px;letter-spacing:3px;color:var(--green);font-weight:700;margin-bottom:8px}
-.sec h2{font-size:32px;font-weight:900;margin-bottom:24px}
+.sec h2{font-size:36px;font-weight:900;margin-bottom:6px;letter-spacing:-0.5px}
+.sec-sub{font-size:13px;color:var(--muted);margin-bottom:28px}
 
-/* ===== 时间线 ===== */
-.tl{position:relative;padding-left:28px;border-left:2px solid #fff}
-.tl-item{position:relative;margin-bottom:26px}
-.tl-item::before{content:"";position:absolute;left:-37px;top:6px;width:14px;height:14px;border-radius:50%;background:var(--green-lt);border:3px solid #fff;box-shadow:0 0 0 2px var(--green-lt)}
-.tl-card{background:#fff;border-radius:18px;padding:22px 26px;box-shadow:0 4px 16px rgba(0,0,0,.05)}
-.tl-card .top{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap}
+/* ===== 底部作品缩略条 ===== */
+.strip{display:flex;gap:12px;overflow:hidden;padding:10px 0 40px;mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.strip .cell{flex:0 0 110px;height:150px;border-radius:12px;overflow:hidden;background:#fff;box-shadow:0 4px 14px rgba(0,0,0,.08)}
+.strip .cell img{width:100%;height:100%;object-fit:cover}
+
+/* ===== 居中时间线 ===== */
+.tl{position:relative;max-width:960px;margin:0 auto;padding:20px 0}
+.tl::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:2px;background:#fff;transform:translateX(-50%)}
+.tl-item{position:relative;width:50%;padding:0 40px 30px 0}
+.tl-item:nth-child(even){margin-left:50%;padding:0 0 30px 40px}
+.tl-item::before{content:"";position:absolute;right:-8px;top:22px;width:16px;height:16px;border-radius:50%;background:var(--green-lt);border:3px solid #fff;box-shadow:0 0 0 2px var(--green-lt);z-index:2}
+.tl-item:nth-child(even)::before{right:auto;left:-8px}
+.tl-item .time-tag{position:absolute;top:22px;right:-130px;font-size:11px;color:var(--green);font-weight:700;white-space:nowrap}
+.tl-item:nth-child(even) .time-tag{right:auto;left:-130px}
+.tl-card{background:#fff;border-radius:18px;padding:22px 26px;box-shadow:0 4px 16px rgba(0,0,0,.06)}
 .tl-card h3{font-size:17px;font-weight:800}
-.tl-card .time{font-size:13px;color:var(--green);font-weight:700}
+.tl-card .time{font-size:13px;color:var(--green);font-weight:700;margin-top:2px}
 .tl-card .org{font-size:13px;color:var(--muted);margin:3px 0 10px}
 .tl-card ul{padding-left:18px}
-.tl-card li{font-size:14px;color:var(--ink2);margin-bottom:5px;line-height:1.75}
+.tl-card li{font-size:13.5px;color:var(--ink2);margin-bottom:5px;line-height:1.7}
 .tl-card li b{color:var(--ink)}
 
 /* ===== 作品集 ===== */
@@ -99,12 +109,13 @@ nav{position:sticky;top:0;z-index:100;display:flex;justify-content:center;paddin
 .cover-drama .tags span{font-size:11px;background:rgba(255,255,255,.25);padding:3px 10px;border-radius:999px}
 
 /* ===== 技能 ===== */
-.skills{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
-.skill-card{background:#fff;border-radius:18px;padding:22px;box-shadow:0 4px 16px rgba(0,0,0,.05)}
+.skills{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.skill-card{background:#fff;border-radius:18px;padding:22px;box-shadow:0 4px 16px rgba(0,0,0,.06);position:relative;overflow:hidden}
+.skill-card .num{font-size:11px;color:var(--green);font-weight:700;letter-spacing:1px;margin-bottom:10px}
 .skill-card h3{font-size:15px;font-weight:800;margin-bottom:12px}
-.skill-row{margin-bottom:10px;font-size:13.5px;color:var(--ink2)}
-.skill-row b{color:var(--ink)}
-.bar{height:6px;background:#F0F0F0;border-radius:6px;margin-top:5px;overflow:hidden}
+.skill-row{margin-bottom:10px;font-size:13px;color:var(--ink2)}
+.skill-row b{color:var(--ink);font-weight:600}
+.bar{height:5px;background:#F0F0F0;border-radius:6px;margin-top:5px;overflow:hidden}
 .bar i{display:block;height:100%;background:linear-gradient(90deg,#9CCC65,#7CB342);border-radius:6px}
 
 /* ===== 联系/二维码 ===== */
@@ -149,9 +160,13 @@ footer{text-align:center;padding:30px 0;font-size:12px;color:var(--muted)}
   .avatar{width:260px;height:260px;margin:0 auto}
   .stats{grid-template-columns:repeat(2,1fr)}
   .grid{grid-template-columns:repeat(2,1fr)}
-  .skills{grid-template-columns:1fr}
+  .skills{grid-template-columns:repeat(2,1fr)}
   .drama-grid{grid-template-columns:repeat(2,1fr)}
   .nav-pill{flex-wrap:wrap;border-radius:18px}
+  .tl::before{left:8px;transform:none}
+  .tl-item,.tl-item:nth-child(even){width:100%;margin-left:0;padding:0 0 24px 30px}
+  .tl-item::before,.tl-item:nth-child(even)::before{left:0;right:auto}
+  .tl-item .time-tag,.tl-item:nth-child(even) .time-tag{position:static;display:block;margin-bottom:6px}
 }
 </style>
 </head>
@@ -160,10 +175,10 @@ footer{text-align:center;padding:30px 0;font-size:12px;color:var(--muted)}
 <nav>
   <div class="nav-pill">
     <a href="#hero" class="active">首页</a>
-    <a href="#experience">经历</a>
-    <a href="#portfolio">作品</a>
-    <a href="#skills">技能</a>
-    <a href="#contact">联系</a>
+    <a href="#experience">工作经历</a>
+    <a href="#portfolio">个人作品</a>
+    <a href="#skills">个人优势</a>
+    <a href="#contact">联系我</a>
   </div>
 </nav>
 
@@ -175,21 +190,31 @@ footer{text-align:center;padding:30px 0;font-size:12px;color:var(--muted)}
       <div class="hello">HELLO / 你好</div>
       <h1>我是李雨秋</h1>
       <div class="en">PORTFOLIO</div>
-      <div class="role">短视频内容制作 · AI 短剧全流程</div>
-      <p class="intro">数字媒体专业 2026 届本科，独立完成从选题、脚本、分镜到成片分发的短视频全链路。作品上线抖音、红果短剧及海外平台，单部最高收藏 64W+。</p>
+      <div class="role">短视频内容制作</div>
+      <p class="intro">数字媒体专业 2026 届本科，十余部 AI 短剧全流程制作，作品上线抖音、红果短剧及海外平台，单部最高收藏 64W+。</p>
       <div class="btns">
         <a class="btn-solid" href="#portfolio">查看我的作品</a>
         <a class="btn-ghost" href="#contact">联系我</a>
       </div>
       <div class="chips">
-        <span>中共党员</span><span>天津理工大学 · 数字媒体</span><span>CET-4</span><span>天津</span>
+        <span>短视频 × AI 内容</span><span>十余部短剧 · 64W+ 收藏</span><span>天津 · 2026 届</span>
       </div>
     </div>
     <div class="avatar-col">
       <div class="avatar"><img src="assets/photo.jpg" alt="李雨秋"></div>
-      <div class="now">NOW<small>求职开放</small></div>
+      <div class="play-btn"></div>
+      <div class="now">NOW<small>开放合作 / 求职</small></div>
     </div>
   </section>
+
+  <!-- 底部作品缩略条 -->
+  <div class="strip">
+    <div class="cell"><img src="assets/drama-lijia2.jpg"></div>
+    <div class="cell"><img src="assets/drama-shenwang.jpg"></div>
+    <div class="cell"><img src="assets/drama-lijia1.jpg"></div>
+    <div class="cell"><img src="assets/drama-yaya.jpg"></div>
+    <div class="cell"><img src="assets/drama-baling.jpg"></div>
+  </div>
 
   <!-- ===== 数据 ===== -->
   <section class="stats">
@@ -201,12 +226,14 @@ footer{text-align:center;padding:30px 0;font-size:12px;color:var(--muted)}
 
   <!-- ===== 经历 ===== -->
   <section class="sec" id="experience">
-    <div class="sec-tag">EXPERIENCE</div>
-    <h2>个人经历</h2>
+    <div class="sec-tag">02 / THE JOURNEY</div>
+    <h2>Work Experience</h2>
+    <p class="sec-sub">个人经历 · 每一段经历都在成就现在的我</p>
     <div class="tl">
       <div class="tl-item">
+        <div class="time-tag">2026.03 — 2026.10</div>
         <div class="tl-card">
-          <div class="top"><h3>内容制作（短视频方向）</h3><span class="time">2026.03 — 2026.10</span></div>
+          <h3>内容制作（短视频方向）</h3>
           <div class="org">天津宣百文化 · 工作经历</div>
           <ul>
             <li>负责短视频漫剧项目全链路内容生产，完成选题拆解、脚本梳理、分镜策划、素材生产、剪辑、成片输出；参与制作<b>十余部 AI 短剧</b>，适配抖音、红果短剧、海外多平台内容规范。</li>
@@ -218,8 +245,9 @@ footer{text-align:center;padding:30px 0;font-size:12px;color:var(--muted)}
         </div>
       </div>
       <div class="tl-item">
+        <div class="time-tag">2025.10 — 2026.01</div>
         <div class="tl-card">
-          <div class="top"><h3>短视频内容运营（实习）</h3><span class="time">2025.10 — 2026.01</span></div>
+          <h3>短视频内容运营（实习）</h3>
           <div class="org">天津昂特数字科技有限公司 · 实习经历</div>
           <ul>
             <li>参与短剧项目全流程，配合完成内容策划、脚本协助、现场拍摄、后期剪辑、新媒体账号运营完整链路。</li>
@@ -228,8 +256,9 @@ footer{text-align:center;padding:30px 0;font-size:12px;color:var(--muted)}
         </div>
       </div>
       <div class="tl-item">
+        <div class="time-tag">2022.09 — 2026.06</div>
         <div class="tl-card">
-          <div class="top"><h3>数字媒体（本科）</h3><span class="time">2022.09 — 2026.06</span></div>
+          <h3>数字媒体（本科）</h3>
           <div class="org">天津理工大学 · 教育背景</div>
           <ul>
             <li>主修课程：视听语言、摄影基础、剪辑基础、影视特效、栏目包装</li>
@@ -242,8 +271,9 @@ footer{text-align:center;padding:30px 0;font-size:12px;color:var(--muted)}
 
   <!-- ===== 作品集 ===== -->
   <section class="sec" id="portfolio">
-    <div class="sec-tag">PORTFOLIO</div>
-    <h2>精选作品</h2>
+    <div class="sec-tag">03 / MY WORKS</div>
+    <h2>Selected Works</h2>
+    <p class="sec-sub">精选作品 · AI 短剧 / 品牌广告 / 动画三维</p>
     <div class="filters">
       <button class="active" data-f="all">全部</button>
       <button data-f="drama">AI 短剧</button>
@@ -352,32 +382,37 @@ footer{text-align:center;padding:30px 0;font-size:12px;color:var(--muted)}
 
   <!-- ===== 技能 ===== -->
   <section class="sec" id="skills">
-    <div class="sec-tag">SKILLS</div>
-    <h2>掌握的技能</h2>
+    <div class="sec-tag">04 / WHAT I DO BEST</div>
+    <h2>Advantages</h2>
+    <p class="sec-sub">个人优势 · 文案 · 设计 · 视频 · AIGC</p>
     <div class="skills">
       <div class="skill-card">
+        <div class="num">01 / CORE</div>
         <h3>拍摄剪辑</h3>
         <div class="skill-row">PR 剪辑 · 精通<div class="bar"><i style="width:95%"></i></div></div>
         <div class="skill-row">剪映快剪 · 精通<div class="bar"><i style="width:92%"></i></div></div>
         <div class="skill-row">达芬奇调色 · 熟练<div class="bar"><i style="width:82%"></i></div></div>
       </div>
       <div class="skill-card">
+        <div class="num">02 / CORE</div>
         <h3>视觉动效</h3>
         <div class="skill-row">AE 动态特效 · 熟练<div class="bar"><i style="width:86%"></i></div></div>
-        <div class="skill-row">Photoshop 图像处理 · 熟练<div class="bar"><i style="width:80%"></i></div></div>
-        <div class="skill-row">AI 图形设计 · 掌握<div class="bar"><i style="width:72%"></i></div></div>
+        <div class="skill-row">Photoshop · 熟练<div class="bar"><i style="width:80%"></i></div></div>
+        <div class="skill-row">Illustrator · 掌握<div class="bar"><i style="width:72%"></i></div></div>
       </div>
       <div class="skill-card">
+        <div class="num">03 / CORE</div>
         <h3>三维制作</h3>
         <div class="skill-row">C4D 建模渲染 · 熟练<div class="bar"><i style="width:82%"></i></div></div>
         <div class="skill-row">Redshift 材质 · 掌握<div class="bar"><i style="width:70%"></i></div></div>
         <div class="skill-row">三维运镜 · 熟练<div class="bar"><i style="width:78%"></i></div></div>
       </div>
       <div class="skill-card">
+        <div class="num">04 / CORE</div>
         <h3>AIGC 工具</h3>
         <div class="skill-row">Midjourney · 精通<div class="bar"><i style="width:90%"></i></div></div>
         <div class="skill-row">即梦 / 可灵 · 精通<div class="bar"><i style="width:88%"></i></div></div>
-        <div class="skill-row">GPT / Gemini 脚本辅助 · 熟练<div class="bar"><i style="width:82%"></i></div></div>
+        <div class="skill-row">GPT / Gemini · 熟练<div class="bar"><i style="width:82%"></i></div></div>
       </div>
     </div>
   </section>
